@@ -8,6 +8,8 @@ authors = ["Vjacheslav <goplit2010.konovalov@yandex.ru>"]
 python = "^3.8"
 Flask = "^2.0.2"
 Flask-SSLify = "^0.1.5"
+python-dotenv = "^0.19.2"
+requests = "^2.27.1"
 
 [tool.poetry.dev-dependencies]
 
