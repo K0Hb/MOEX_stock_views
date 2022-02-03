@@ -2,32 +2,45 @@ from binascii import b2a_base64
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 
 
-def start_keyboard():
-    b1 = KeyboardButton('/индексы')
-    b2 = KeyboardButton('/акции')
-    b3 = KeyboardButton('/иностранные акции')
-    b4 = KeyboardButton('/товары')
+start_buttons = ['/индексы', '/акции', '/иностранные_акции', '/товары']
+commodites_buttons = ['/нефть_brent', '/нефть_WTI', '/натуральный_газ', '/серебро', '/палладий', '/золото']
+stocks_buttons = ['/сбер', '/газпром', '/лукойл', '/яндекс', '/норильский_никель', '/новатэк', '/татнефть', '/мосбиржа', '/втб', '/сургутнефтегаз', '/алроса']
 
-    kb = ReplyKeyboardMarkup(resize_keyboard=True)
-    kb.add(b1).add(b2).add(b3).add(b4)
-    return kb
+dict_list_but = {
+    'старт' : start_buttons,
+    'товары' : commodites_buttons,
+    'акции' : stocks_buttons,
+}
+dict_list_stocks = {
+        '/сбер' : 'SBER',
+        '/газпром' : 'GAZP',
+        '/лукойл' : 'LKOH',
+        '/яндекс' : 'YANDX',
+        '/норильский_никель' : 'GMKN',
+        '/новатэк' : 'NVTK',
+        '/татнефть' : 'TATNP',
+        '/мосбиржа' : 'MOEX',
+        '/втб' : 'VTBR',
+        '/сургутнефтегаз' : 'SNGS',
+        '/алроса' : 'ALRS',
+    }
 
-def product_keyboard():
-    b1 = KeyboardButton('/нефть brent')
-    b2 = KeyboardButton('/нефть WTI')
-    b3 = KeyboardButton('/натуральный газ')
-    b4 = KeyboardButton('/серебро')
-    b5 = KeyboardButton('/палладий')
-    b6 = KeyboardButton('/золото')
-    buttons = [b1, b2, b3, b4, b5, b6]
+def generate_keyboard(buttons_name=None):
+    buttons_list = dict_list_but[buttons_name]
     kb = ReplyKeyboardMarkup(resize_keyboard=True)
-    for but in buttons:
-        kb.add(but)
-    return kb
-
-def stocks_keyboard():
-    buttons = ['/сбер', '/газпром', '/лукойл', '/яндекс', '/норильский никель', '/новатэк', '/татнефть', '/мосбиржа', '/втб', '/сургутнефтегаз', '/алроса']
-    kb = ReplyKeyboardMarkup(resize_keyboard=True)
-    for but in buttons:
-        kb.add(KeyboardButton(but))
+    if len(buttons_list) < 5:
+        for but in buttons_list:
+            kb.add(KeyboardButton(but))
+    else:
+        count = 0
+        for but in buttons_list:
+            count += 1
+            print(count)
+            if count == 1:
+                kb.add(KeyboardButton(but))
+            elif count < 4:
+                kb.insert(KeyboardButton(but))
+            else:
+                count = 1
+                kb.add(KeyboardButton(but))
     return kb

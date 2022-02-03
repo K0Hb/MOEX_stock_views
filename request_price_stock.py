@@ -71,4 +71,4 @@ def get_commodites(product_ticker):
 
 
 
-# print(get_commodites('BZ=F'))
+print(get_commodites('NG=F'))
