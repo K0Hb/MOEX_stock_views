@@ -9,5 +9,5 @@ dp = Dispatcher(bot, loop=loop)
 
 
 if __name__ == '__main__':
-    from handlers import dp, asnwer
+    from handlers import dp
     executor.start_polling(dp)
