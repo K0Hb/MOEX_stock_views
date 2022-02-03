@@ -35,5 +35,3 @@ def get_stock_info(stock_ticker):
         'Размер дивиденда на одну акцию' : divident,
         }
     return result
-
-print(get_stock_info('SBER.ME'))

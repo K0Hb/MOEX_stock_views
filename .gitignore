@@ -2,3 +2,4 @@
 .env
 .idea
 answer
+__pycache__

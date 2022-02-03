@@ -12,6 +12,7 @@ python-dotenv = "^0.19.2"
 requests = "^2.27.1"
 apimoex = "^1.2.0"
 yfinance = "^0.1.70"
+aiogram = "^2.19"
 
 [tool.poetry.dev-dependencies]
 
