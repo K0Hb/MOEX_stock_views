@@ -1,9 +1,16 @@
 import yfinance as yf
 
-all_rus_stocks = ['SBER.ME', 'GAZP.ME', 'LKOH.ME', 'YANDX.ME', 'GMKN.ME', 'MTSS.ME', 'ALRS.ME', 'NLMK.ME', 'MAGN.ME']
 
 def get_stock_info(stock_ticker):
-    stock = yf.Ticker(stock_ticker)
+    all_rus_stocks = ['SBER', 'GAZP', 'LKOH', 'YANDX', 'GMKN', 'MTSS', 'ALRS', 'NLMK',
+                        'MAGN', 'VTBR', 'OZON', 'POLY', 'TCSG', 'SBERP', 'VKCO', 'MOEX', 'CHMF', 'ROSN', 
+                        'AFLT', 'NVTK', 'TATN', 'PLZL', 'DSKY', 'FIVE', 'AFKS', 'RUAL', 'MTLP', 'MVID', 'PHOR', 
+                        'IRAO', 'SHGSP', 'PIKK', 'SIBM', 'SNGS', 'FEES', 'AGRO', 'RASP', 'SGZH', 'HYDR', 'RSTI',
+                        'TATNP', 'GLTR', 'FIXP', 'POGR', 'BANEP', 'RTKM', 'AKRN', 'MTLRP', 'SNGSP']
+
+    blue_stoks = ['SBER', 'GAZP', 'LKOH', 'YANDX', 'GMKN', 'NVTK', 'TATNP', 'MOEX', 'VTBR', 'SNGS', 'ALRS']
+
+    stock = yf.Ticker(stock_ticker + '.ME')
     sector = stock.info['sector']
     price = stock.info['regularMarketPrice']
     last_divident = stock.info['lastDividendValue']
@@ -19,6 +26,7 @@ def get_stock_info(stock_ticker):
     last_price_close = stock.info['previousClose']
     procent = round((price - last_price_close)/ price * 100, 2)
     result = {
+        'тикер' : stock_ticker,
         'сектор' : sector,
         'капитализация' : marketCap,
         'цена' : price,
@@ -34,4 +42,33 @@ def get_stock_info(stock_ticker):
         'Размер последнего дивиденда на одну акцию' : last_divident,
         'Размер дивиденда на одну акцию' : divident,
         }
-    return result
+    string_view = ''
+    for key in result:
+        string_view += f'{key} : {result[key]}\n' 
+    return string_view
+
+def get_commodites(product_ticker):
+    products = ['GC=F', 'BZ=F', 'MCL=F', 'SI=F', 'NG=F', 'PA=F']
+    product = yf.Ticker(product_ticker)
+    daylow = product.info['dayLow']
+    dayhigh = product.info['dayHigh']
+    open_price = product.info['regularMarketOpen']
+    price = product.info['regularMarketPrice']
+    procent = round((price - open_price)/ price * 100, 2)
+    name = product.info['shortName']
+    result = {
+        'название' : name,
+        'цена' : price,
+        'процент изменения' : procent,
+        'цена открытия денвной сессии' : open_price,
+        'дневной максимум' : dayhigh,
+        'дневной минимум' : daylow,
+        }
+    string_view = ''
+    for key in result:
+        string_view += f'{key} : {result[key]}\n' 
+    return string_view
+
+
+
+# print(get_commodites('BZ=F'))
