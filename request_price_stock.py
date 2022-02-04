@@ -7,7 +7,10 @@ def yahoo_get_api(ticker):
     session = requests.session()
     response = session.get(url, headers={'User-Agent': headers})
     result = dict(response.json())
-    data = result['quoteSummary']['result'][0]['price']
+    return result
+
+def genearate_view(data_dict):
+    data = data_dict['quoteSummary']['result'][0]['price']
     procent = data['regularMarketChangePercent']['fmt']
     price = data['regularMarketPrice']['fmt']
     open_price = data['regularMarketOpen']['fmt']
@@ -20,7 +23,7 @@ def yahoo_get_api(ticker):
     trend = '📈'
     if float(procent[0:3]) < 0:
         trend = '📉'
-    data_dict = {
+    result_dict = {
         'Название' : name,
         'Тикер' : ticker_,
         'Цена в' : valute,
@@ -29,7 +32,7 @@ def yahoo_get_api(ticker):
         'Открытие' : open_price,
         'Пред. закр' : close_price,
     }
-    return data_dict
+    return result_dict
 
 def get_stock_info(stock_ticker):
     all_rus_stocks = ['SBER', 'GAZP', 'LKOH', 'YANDX', 'GMKN', 'MTSS', 'ALRS', 'NLMK',
@@ -39,22 +42,47 @@ def get_stock_info(stock_ticker):
                         'TATNP', 'GLTR', 'FIXP', 'POGR', 'BANEP', 'RTKM', 'AKRN', 'MTLRP', 'SNGSP']
 
     blue_stoks = ['SBER', 'GAZP', 'LKOH', 'YANDX', 'GMKN', 'NVTK', 'TATNP', 'MOEX', 'VTBR', 'SNGS', 'ALRS']
-    result = yahoo_get_api(stock_ticker + '.ME')
+    yahoo_info = yahoo_get_api(stock_ticker + '.ME')
+    result = genearate_view(yahoo_info)
     string_view = ''
     for key in result:
         string_view += f'{key} : {result[key]}\n' 
     return string_view
 
 def get_commodites(product_ticker):
-    result = yahoo_get_api(product_ticker)
+    yahoo_info = yahoo_get_api(product_ticker)
+    result = genearate_view(yahoo_info)
     string_view = ''
     for key in result:
         string_view += f'{key} : {result[key]}\n' 
     return string_view
 
 def get_index(index_ticker):
-    result = yahoo_get_api(index_ticker)
+    yahoo_info = yahoo_get_api(index_ticker)
+    result = genearate_view(yahoo_info)
     string_view = ''
     for key in result:
         string_view += f'{key} : {result[key]}\n' 
     return string_view
+
+def general_sentiment():
+    sentiment = {
+        'РТС' : 'RTSI.ME',
+        'Индекс Мосбиржи' : 'IMOEX.ME',
+        'USD/RUB' : 'RUB=X',
+        'EUR/RUB' : 'EURRUB=X',
+        'Нефть brent' : 'BZ=F',
+        'Золото' : 'GC=F',
+        'SP500' : '^GSPC',
+        'BTC/USD' : 'BTC-USD',
+    }
+    result = 'Рыночный сентимент:\n'
+    for name, ticker in sentiment.items():
+        yaho_dict = yahoo_get_api(ticker)['quoteSummary']['result'][0]['price']
+        price = yaho_dict['regularMarketPrice']['fmt']
+        procent = yaho_dict['regularMarketChangePercent']['fmt']
+        trend = '📈'
+        if float(procent[0:3]) < 0:
+            trend = '📉'
+        result += f'{name} : {procent} {trend}\n'
+    return result

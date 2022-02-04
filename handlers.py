@@ -1,6 +1,6 @@
 from bot_v2 import bot, dp
 from aiogram.types import Message
-from request_price_stock import get_commodites, get_stock_info, get_index
+from request_price_stock import get_commodites, get_stock_info, get_index, general_sentiment
 from keyboard import generate_keyboard
 
 stocks = {
@@ -48,7 +48,7 @@ currencies = {
 
 @dp.message_handler(commands=['старт', 'вернуться'])
 async def start(message):
-    text = 'Приветствую. Выберите эшелон акций'
+    text = general_sentiment()
     await message.answer(text=text, reply_markup=generate_keyboard('старт'))
 
 @dp.message_handler(commands=['акции'])
