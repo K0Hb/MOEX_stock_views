@@ -1,4 +1,4 @@
-[![linter](https://github.com/Corrosion667/python-project-lvl3/actions/workflows/linter-and-test-check.yml/badge.svg)](https://github.com/Corrosion667/python-project-lvl3/actions/workflows/linter-and-test-check.yml)
+[![linter](https://github.com/K0Hb/MOEX_stock_views/blob/main/.github/workflows/linter.svg)](https://github.com/K0Hb/MOEX_stock_views/blob/main/.github/workflows/linter.yaml)
 
 # MOEX_stock_views
 
