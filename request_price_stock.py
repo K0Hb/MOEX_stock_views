@@ -21,8 +21,7 @@ def genearate_view(data_dict):
     name = data['shortName']
     valute = data['currency']
     trend = '📈'
-    print(float(procent[0:3]))
-    if float(procent[0:6]) < 0:
+    if float(procent.replace('%','')) < 0:
         trend = '📉'
     result_dict = {
         'Название' : name,
@@ -83,7 +82,7 @@ def general_sentiment():
         price = yaho_dict['regularMarketPrice']['fmt']
         procent = yaho_dict['regularMarketChangePercent']['fmt']
         trend = '📈'
-        if float(procent[0:6]) < 0:
+        if float(procent.replace('%','')) < 0:
             trend = '📉'
         result += f'{name} : {procent} {trend}\n'
     return result
