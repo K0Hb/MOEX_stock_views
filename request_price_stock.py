@@ -84,5 +84,5 @@ def general_sentiment():
         trend = '📈'
         if float(procent.replace('%','')) < 0:
             trend = '📉'
-        result += f'{name} : {procent} {trend}\n'
+        result += f'{name} : {price} {trend} {procent}\n'
     return result
