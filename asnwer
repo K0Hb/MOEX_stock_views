@@ -1,0 +1,54 @@
+{
+  "ok": true,
+  "result": [
+    {
+      "update_id": 965678775,
+      "message": {
+        "message_id": 2,
+        "from": {
+          "id": 496608467,
+          "is_bot": false,
+          "first_name": "Vjacheslav",
+          "username": "K00Hb",
+          "language_code": "ru"
+        },
+        "chat": {
+          "id": 496608467,
+          "first_name": "Vjacheslav",
+          "username": "K00Hb",
+          "type": "private"
+        },
+        "date": 1643786218,
+        "text": "/start",
+        "entities": [
+          {
+            "offset": 0,
+            "length": 6,
+            "type": "bot_command"
+          }
+        ]
+      }
+    },
+    {
+      "update_id": 965678776,
+      "message": {
+        "message_id": 4,
+        "from": {
+          "id": 496608467,
+          "is_bot": false,
+          "first_name": "Vjacheslav",
+          "username": "K00Hb",
+          "language_code": "ru"
+        },
+        "chat": {
+          "id": 496608467,
+          "first_name": "Vjacheslav",
+          "username": "K00Hb",
+          "type": "private"
+        },
+        "date": 1643797592,
+        "text": "lf"
+      }
+    }
+  ]
+}

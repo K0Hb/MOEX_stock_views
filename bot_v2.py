@@ -10,4 +10,5 @@ dp = Dispatcher(bot, loop=loop)
 
 if __name__ == '__main__':
     from handlers import dp
+    print('Бот начал работу')
     executor.start_polling(dp)
